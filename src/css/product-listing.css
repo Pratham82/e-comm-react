@@ -1,0 +1,188 @@
+body {
+  background-color: var(--color-secondary);
+}
+main {
+  display: flex;
+  /* height: 100vh; */
+  background-color: var(--color-secondary);
+  /* padding-top: 55px; */
+  padding-top: var(--u-55);
+}
+
+aside {
+  background-color: var(--color-tertiary);
+  width: 220px;
+  padding: var(--u-14);
+  position: fixed;
+  height: 100vh;
+  z-index: 2;
+}
+
+.product-section {
+  padding: var(--u-10) var(--u-10) var(--u-10) 230px;
+  /* margin: 260px; */
+  /* background-color: red; */
+}
+
+.card {
+  border-radius: var(--rounded-none);
+}
+.card-v {
+  /* height: 418px; */
+  margin: var(--u-6);
+  width: 16.3rem;
+}
+
+.card-img {
+  /* width: 230px;
+  height: 250px; */
+  width: 240px;
+  height: 230px;
+  border-radius: var(--rounded-none);
+}
+.card-action-btn {
+  background-color: var(--color-secondary);
+  border-radius: var(--rounded-none);
+  color: var(--color-dark);
+  transition: var(--normal-transition);
+}
+
+.card-action-btn:hover {
+  background-color: var(--color-secondary-shade);
+}
+
+.rating-div {
+  background-color: transparent;
+}
+
+.rating-div > i {
+  color: var(--color-dark);
+  padding: var(--2);
+  font-size: var(--text-sm);
+}
+
+input[name="rating"],
+input[name="pricing"] {
+  accent-color: var(--color-dark);
+}
+
+input[name="category"] {
+  /* -webkit-appearance: none */
+  background-color: red;
+}
+input[name="category"]:active {
+  /* background: var(--color-dark); */
+  background-color: red;
+}
+
+.price-range {
+  width: 100%;
+  -webkit-appearance: none;
+  height: var(--u-8);
+  background: var(--color-secondary);
+  border-radius: var(--rounded-md);
+  cursor: pointer;
+}
+
+.price-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: var(--u-14);
+  width: var(--u-14);
+  border-radius: var(--rounded-full);
+  background: var(--color-dark);
+}
+
+p {
+  cursor: pointer;
+}
+
+/* Custom checkbox */
+
+/* checkbox container */
+.checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: var(--u-24);
+  /* margin-bottom: 12px; */
+  cursor: pointer;
+  /* font-size: 22px; */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* hide the browser's default checkbox */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  background-color: var(--color-light);
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .checkmark {
+  background-color: var(--color-light);
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-container input:checked ~ .checkmark {
+  background-color: var(--color-dark);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkmark:after {
+  left: 6px;
+  top: 4px;
+  width: 5px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(40deg);
+}
+
+/* ---------------------Media queries-------------------- */
+@media screen and (max-width: 600px) {
+  aside,
+  section {
+    margin-top: 90px;
+  }
+  aside {
+    display: none;
+  }
+  main {
+    justify-content: center;
+  }
+  section {
+    padding-left: 40px;
+    display: flex;
+    /* overflow: scroll; */
+  }
+}
