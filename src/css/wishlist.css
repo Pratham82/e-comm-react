@@ -1,0 +1,67 @@
+body {
+  background-color: var(--color-secondary);
+}
+main {
+  display: flex;
+  /* height: 100vh; */
+  background-color: var(--color-secondary);
+  /* padding-top: 55px; */
+  padding-top: var(--u-55);
+}
+
+aside {
+  background-color: var(--color-tertiary);
+  width: 220px;
+  padding: var(--u-14);
+  position: fixed;
+  height: 100vh;
+  z-index: 2;
+}
+
+section {
+  padding: var(--u-10);
+  /* padding-left: 260px; */
+  /* background-color: red; */
+}
+
+.card {
+  border-radius: var(--rounded-none);
+}
+.card-v {
+  /* height: 418px; */
+  margin: var(--u-6);
+  width: 16.3rem;
+}
+
+.card-img {
+  /* width: 230px;
+  height: 250px; */
+  width: 240px;
+  height: 230px;
+  border-radius: var(--rounded-none);
+}
+.card-action-btn {
+  background-color: var(--color-secondary);
+  border-radius: var(--rounded-none);
+  color: var(--color-dark);
+  transition: var(--normal-transition);
+}
+
+.card-action-btn:hover {
+  background-color: var(--color-secondary-shade);
+}
+
+/* ---------------------Media queries-------------------- */
+@media screen and (max-width: 600px) {
+  aside,
+  section {
+    margin-top: 90px;
+  }
+  aside {
+    display: none;
+  }
+  section {
+    display: flex;
+    justify-content: center;
+  }
+}
