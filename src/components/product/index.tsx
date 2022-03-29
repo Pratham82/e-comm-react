@@ -1,16 +1,13 @@
-import img1 from "assets/images/product_listing/product_1.jpg";
-
-type ProductProps = {
-  wishList?: boolean;
-};
-export default function Product({ wishList }: ProductProps | any) {
+export default function Product({
+  productData: { name, image, price, inStock, ratings, fastDelivery },
+}: any) {
   return (
     <div className="card card-v floating-shadow">
       <div className="card-body flex justify-center">
         <div className="card-header flex justify-between">
-          <div className="card-badge">ON SALE</div>
-          <span>
-            <i className={`fa-heart ${wishList ? "fas" : "fal"}`} />
+          {!inStock && <div className="card-badge">OUT OF STOCK</div>}
+          <span className="wishlist-container">
+            <i className={`fa-heart ${fastDelivery ? "fas" : "fal"}`} />
           </span>
           <span className="hidden">
             <i className="fal fa-times-circle" />
@@ -20,18 +17,35 @@ export default function Product({ wishList }: ProductProps | any) {
           <div className="overlay-text">Out of stock</div>
         </div>
         <div className="card-img-div">
-          <img src={img1} className="card-img" alt="" />
+          <img src={image} className="card-img-new" alt={name} />
         </div>
       </div>
       <div className="card-footer">
-        <div className="card-text">Balenciaga Grey Speed Sock Sneakers</div>
-        <div className="card-pricing">
-          <span style={{ textDecoration: "line-through" }}>$990</span> &nbsp;
-          $800
+        <div className="card-text product-name">{name}</div>
+        <div className="flex items-center justify-center">
+          <span className="card-text">
+            <span className="rating-container">
+              {ratings} <i className="fas fa-star" key={Math.random()} />{" "}
+            </span>
+          </span>
+          <span className="card-text">
+            {fastDelivery ? (
+              <span className="fast-delivery-badge">Fast Delivery</span>
+            ) : (
+              <span className="normal-delivery">Normal Delivery</span>
+            )}
+          </span>
         </div>
-        <button type="button" className="card-action-btn">
-          <i className="far fa-shopping-cart" /> &nbsp; ADD TO CART
-        </button>
+        <div className="card-pricing">$ {price}</div>
+        {inStock ? (
+          <button type="button" className="card-action-btn">
+            <i className="far fa-shopping-cart" /> &nbsp; ADD TO CART
+          </button>
+        ) : (
+          <button type="button" className="card-action-btn btn-disabled">
+            <i className="far fa-shopping-cart" /> &nbsp; ADD TO CART
+          </button>
+        )}
       </div>
     </div>
   );

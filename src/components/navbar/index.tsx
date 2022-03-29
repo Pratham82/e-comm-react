@@ -1,7 +1,13 @@
 import { NavLink } from "react-router-dom";
 import "css/header.css";
+import { useState } from "react";
+import useProduct from "hooks/useProducts";
+import { FILTER_BY_QUERY } from "types/product";
 
 export default function Navbar() {
+  const { dispatch } = useProduct();
+  const [query, setQuery] = useState("");
+
   return (
     <nav className="flex justify-around items-center navbar">
       <div className="flex items-center branding">
@@ -21,8 +27,16 @@ export default function Navbar() {
 
       <div className="searchDiv">
         <input
-          className="searchInput"
           type="text"
+          className="searchInput"
+          value={query}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            dispatch({
+              type: FILTER_BY_QUERY,
+              payload: e.target.value,
+            });
+          }}
           placeholder="Search for products..."
         />
         <i className="fal fa-search searchIcon" />
@@ -34,7 +48,6 @@ export default function Navbar() {
           className={({ isActive }) =>
             isActive ? "active-icon-link flex flex-col items-center" : ""
           }
-          // className="flex flex-col items-center"
         >
           <li>
             <i className="far fa-shopping-bag" />
