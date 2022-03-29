@@ -24,8 +24,15 @@ aside {
   /* background-color: red; */
 }
 
+.clear-btn {
+  border: none;
+  cursor: pointer;
+  padding: var(--u-4) var(--u-6);
+  background-color: transparent;
+}
+
 .card {
-  border-radius: var(--rounded-none);
+  border-radius: var(--rounded-md) !important;
 }
 .card-v {
   /* height: 418px; */
@@ -33,22 +40,78 @@ aside {
   width: 16.3rem;
 }
 
+.product-name {
+  min-height: 46px;
+}
+
 .card-img {
   /* width: 230px;
   height: 250px; */
   width: 240px;
   height: 230px;
-  border-radius: var(--rounded-none);
+  border-radius: var(--rounded-md);
 }
+
+.card-img-new {
+  width: 230px;
+  max-height: 220px;
+  border-radius: var(--rounded-md);
+}
+
 .card-action-btn {
   background-color: var(--color-secondary);
   border-radius: var(--rounded-none);
   color: var(--color-dark);
   transition: var(--normal-transition);
+  border-radius: var(--rounded-md) !important;
 }
 
 .card-action-btn:hover {
   background-color: var(--color-secondary-shade);
+}
+
+.wishlist-container {
+  background-color: var(--color-light);
+  /* padding: var(--u-12) var(--u-8) var(--u-8) var(--u-8); */
+  padding: var(--u-8) var(--u-8) var(--u-8) var(--u-8);
+  border-radius: var(--rounded-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fast-delivery-badge {
+  font-size: var(--text-xs);
+  padding: var(--u-2) var(--u-10);
+  border-radius: var(--rounded-md);
+  color: var(--color-light);
+  border: 1px solid var(--color-success-tint);
+  background-color: var(--color-success-tint);
+}
+
+.normal-delivery {
+  font-size: var(--text-xs);
+  padding: var(--u-2) var(--u-10);
+  border-radius: var(--rounded-md);
+  color: var(--color-light);
+  border: 1px solid var(--color-primary-tint);
+  background-color: var(--color-primary-tint);
+}
+
+.btn-disabled {
+  color: var(--color-light) !important;
+}
+
+.rating-container {
+  color: black;
+  color: #ffd700;
+  color: white;
+  background-color: var(--color-success);
+  padding: var(--u-1) var(--u-6);
+  margin-top: 4px;
+  border-radius: var(--rounded-md);
+  font-size: var(--text-sm);
+  display: inline-block;
 }
 
 .rating-div {
@@ -173,6 +236,7 @@ p {
   aside,
   section {
     margin-top: 90px;
+    display: flex;
   }
   aside {
     display: none;
@@ -180,9 +244,7 @@ p {
   main {
     justify-content: center;
   }
-  section {
-    padding-left: 40px;
-    display: flex;
-    /* overflow: scroll; */
+  .product-section {
+    padding: var(--u-10);
   }
 }
