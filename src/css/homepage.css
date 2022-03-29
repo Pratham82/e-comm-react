@@ -2,6 +2,7 @@ main {
   display: flex;
   flex-wrap: wrap;
   padding-top: 55px;
+  background-color: transparent !important;
 }
 
 .item {
@@ -25,6 +26,23 @@ main {
 
 .item img:hover {
   transform: scale(1.15);
+}
+
+.bg-video {
+  /* position: absolute; */
+  width: 100%;
+  /* left: 50%;
+  top: 50%;
+  height: 50%; */
+  object-fit: cover;
+  /* transform: translate(-50%, -50%); */
+  z-index: -2;
+}
+
+.bg-trs {
+  background-color: rgba(0, 0, 0, 0.199);
+  height: 50vh;
+  width: 100vw;
 }
 
 @media screen and (max-width: 420px) {
