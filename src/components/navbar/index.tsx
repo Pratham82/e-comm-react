@@ -3,10 +3,16 @@ import "css/header.css";
 import { useState } from "react";
 import useProduct from "hooks/useProducts";
 import { FILTER_BY_QUERY } from "types/product";
+import useCart from "hooks/useCart";
 
 export default function Navbar() {
   const { dispatch } = useProduct();
   const [query, setQuery] = useState("");
+
+  const {
+    data: { cartData },
+  } = useCart();
+  const cartItems = cartData.length > 0 && cartData.length;
 
   return (
     <nav className="flex justify-around items-center navbar">
@@ -45,10 +51,9 @@ export default function Navbar() {
       <ul className="flex items-center pages">
         <NavLink
           to="/cart"
-          className={({ isActive }) =>
-            isActive ? "active-icon-link flex flex-col items-center" : ""
-          }
+          className={({ isActive }) => (isActive ? "active-icon pb-2" : "")}
         >
+          {cartItems && <span className="hovering-count">{cartItems}</span>}
           <li>
             <i className="far fa-shopping-bag" />
           </li>
@@ -56,9 +61,7 @@ export default function Navbar() {
         </NavLink>
         <NavLink
           to="wishlist"
-          className={({ isActive }) =>
-            isActive ? "active-icon-link flex flex-col items-center" : ""
-          }
+          className={({ isActive }) => (isActive ? "active-icon pb-2" : "")}
         >
           <li>
             <i className="far fa-heart" />
@@ -67,9 +70,7 @@ export default function Navbar() {
         </NavLink>
         <NavLink
           to="/login"
-          className={({ isActive }) =>
-            isActive ? "active-icon-link flex flex-col items-center" : ""
-          }
+          className={({ isActive }) => (isActive ? "active-icon pb-2" : "")}
         >
           <li>
             <i className="far fa-user" />
