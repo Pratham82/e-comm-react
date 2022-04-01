@@ -28,6 +28,20 @@ ul > a {
   cursor: pointer;
 }
 
+.ic {
+  position: relative;
+}
+.hovering-count {
+  background-color: rgba(0, 0, 0, 0.144);
+  font-size: small;
+  position: absolute;
+  margin-top: -10px;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--rounded-md);
+  color: black;
+}
+
 /* Search icon */
 .searchDiv i {
   position: absolute;
@@ -55,6 +69,10 @@ ul > a {
 .active-link {
   text-decoration: underline;
   /* background-color: red; */
+}
+
+.active-icon {
+  border-bottom: 1px solid black;
 }
 
 .active-icon-link {
