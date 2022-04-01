@@ -52,3 +52,13 @@ export const ratingsArray = [
   { id: 2, val: twoStar },
   { id: 1, val: oneStar },
 ];
+
+export function capitalize(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+export const checkDuplicate = (productId: any, cartData: any) => {
+  return cartData
+    .map(({ id: currId }: any) => currId === productId)
+    .some((val: any) => val);
+};
