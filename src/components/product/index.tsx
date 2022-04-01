@@ -1,6 +1,15 @@
-export default function Product({
-  productData: { name, image, price, inStock, ratings, fastDelivery },
-}: any) {
+import useCart from "hooks/useCart";
+import { addToCart } from "services/cart";
+import { checkDuplicate } from "utils";
+
+export default function Product({ productData }: any) {
+  const { id, name, image, price, inStock, ratings, fastDelivery } =
+    productData;
+  const {
+    data: { cartData },
+    dispatchCart,
+  } = useCart();
+
   return (
     <div className="card card-v floating-shadow">
       <div className="card-body flex justify-center">
@@ -38,8 +47,19 @@ export default function Product({
         </div>
         <div className="card-pricing">$ {price}</div>
         {inStock ? (
-          <button type="button" className="card-action-btn">
-            <i className="far fa-shopping-cart" /> &nbsp; ADD TO CART
+          <button
+            type="button"
+            className="card-action-btn"
+            onClick={() => addToCart(productData, dispatchCart)}
+            disabled={checkDuplicate(id, cartData)}
+          >
+            {!checkDuplicate(id, cartData) ? (
+              <>
+                <i className="far fa-shopping-cart mr-2" /> ADD TO CART
+              </>
+            ) : (
+              "ADDED IN CART"
+            )}
           </button>
         ) : (
           <button type="button" className="card-action-btn btn-disabled">
