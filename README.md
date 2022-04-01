@@ -1,4 +1,4 @@
-# React TS, eslint, prettier, husky template
+# SNKR Town
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -27,3 +27,7 @@ Lints the code with eslint
 ### `npm run lint:fix`
 
 Fixes all linting errors using eslint
+
+Project Screenshots:
+
+![Screenshot from 2022-04-01 21-57-13](https://user-images.githubusercontent.com/13178080/161304778-e2a9925b-30ff-48f2-8de0-257ea802ad00.png)
