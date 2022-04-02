@@ -64,29 +64,29 @@ export default function Sorting() {
       <div className="pt-32 text-left">
         <h5 className="h6">Sort by</h5>
         <div className="pt-6">
-          <input
-            type="radio"
-            name="pricing"
-            id="low"
-            value="low"
-            checked={pricing === "low"}
-            onChange={(e) => handleSorting(e)}
-          />
-          <label htmlFor="low" className="pl-8">
-            Price - Low to high{" "}
+          <label htmlFor="low">
+            <input
+              type="radio"
+              name="pricing"
+              id="low"
+              value="low"
+              checked={pricing === "low"}
+              onChange={(e) => handleSorting(e)}
+            />
+            <span className="pl-10">Price - Low to high </span>
           </label>
         </div>
         <div>
-          <input
-            type="radio"
-            name="pricing"
-            id="high"
-            value="high"
-            checked={pricing === "high"}
-            onChange={(e) => handleSorting(e)}
-          />
-          <label htmlFor="high" className="pl-8">
-            Price - High to low{" "}
+          <label htmlFor="high">
+            <input
+              type="radio"
+              name="pricing"
+              id="high"
+              value="high"
+              checked={pricing === "high"}
+              onChange={(e) => handleSorting(e)}
+            />
+            <span className="pl-10">Price - High to low</span>
           </label>
         </div>
       </div>

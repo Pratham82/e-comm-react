@@ -84,7 +84,7 @@ export default function Cart() {
           <div className="h6 mt-60">
             Cart is empty
             <span className="pl-6 link-tag">
-              <Link to="/products">Continue shopping</Link>{" "}
+              <Link to="/products">Continue shopping</Link>
             </span>
           </div>
         </div>

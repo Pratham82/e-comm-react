@@ -63,7 +63,7 @@ export default function ProductInCart({ productData }: any) {
               disabled={quantity === 1}
             >
               <i className="fas fa-minus-circle" />
-            </button>{" "}
+            </button>
           </span>
         </div>
         <div className="card-pricing">${price}</div>

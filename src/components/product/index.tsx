@@ -59,7 +59,7 @@ export default function Product({ productData }: any) {
         <div className="flex items-center justify-center">
           <span className="card-text">
             <span className="rating-container">
-              {ratings} <i className="fas fa-star" key={Math.random()} />{" "}
+              {ratings} <i className="fas fa-star" key={Math.random()} />
             </span>
           </span>
           <span className="card-text">

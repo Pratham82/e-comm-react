@@ -41,7 +41,7 @@ export default function WishList() {
             <div className="h6 mt-60">
               Wishlist is empty
               <span className="pl-6 link-tag">
-                <Link to="/products">Check products</Link>{" "}
+                <Link to="/products">Check products</Link>
               </span>
             </div>
           </div>

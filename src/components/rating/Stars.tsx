@@ -11,8 +11,8 @@ export default function Stars({ stars, isText }: RatingProps) {
         ) : (
           <i className="fal fa-star" key={Math.random()} />
         ),
-      )}{" "}
-      {isText && "& up"}
+      )}
+      {isText && " & up"}
     </span>
   );
 }
