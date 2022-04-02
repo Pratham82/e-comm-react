@@ -62,3 +62,11 @@ export const checkDuplicate = (productId: any, cartData: any) => {
     .map(({ id: currId }: any) => currId === productId)
     .some((val: any) => val);
 };
+
+export const isProductInWishlist = (prodId: any, wishlistData: any) => {
+  return wishlistData
+    .map(({ id: currId }: any) => currId === prodId)
+    .some((val: any) => val);
+};
+
+export const isEntityEmpty = (items: any) => items.length > 0 && items.length;
