@@ -40,6 +40,27 @@ aside {
   width: 16.3rem;
 }
 
+.badge-visible {
+  visibility: visible;
+}
+
+.badge-hidden {
+  visibility: hidden;
+}
+
+.wishlist-btn {
+  border: var(--u-1) solid var(--color-secondary);
+  transition: 0.1s ease-in;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+}
+.wishlist-btn:active {
+  transform: scale(0.9);
+  box-shadow: none;
+}
+
 .product-name {
   min-height: 46px;
 }

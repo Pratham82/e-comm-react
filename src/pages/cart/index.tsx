@@ -2,6 +2,7 @@ import "css/cart.css";
 import useCart from "hooks/useCart";
 import ProductInCart from "components/product-in-cart";
 import { Link } from "react-router-dom";
+import { isEntityEmpty } from "utils";
 
 export default function Cart() {
   const {
@@ -25,36 +26,35 @@ export default function Cart() {
   return (
     <div className="cart-wrapper">
       <section className="flex flex-col items-center cart-section">
-        {cartData.length
-          ? cartData.map(
-              ({
-                id,
-                name,
-                image,
-                price,
-                inStock,
-                fastDelivery,
-                ratings,
-                quantity,
-              }: any) => (
-                <ProductInCart
-                  key={id}
-                  productData={{
-                    id,
-                    name,
-                    image,
-                    price,
-                    inStock,
-                    fastDelivery,
-                    ratings,
-                    quantity,
-                  }}
-                />
-              ),
-            )
-          : ""}
+        {isEntityEmpty(cartData) &&
+          cartData.map(
+            ({
+              id,
+              name,
+              image,
+              price,
+              inStock,
+              fastDelivery,
+              ratings,
+              quantity,
+            }: any) => (
+              <ProductInCart
+                key={id}
+                productData={{
+                  id,
+                  name,
+                  image,
+                  price,
+                  inStock,
+                  fastDelivery,
+                  ratings,
+                  quantity,
+                }}
+              />
+            ),
+          )}
       </section>
-      {cartData.length && (
+      {isEntityEmpty(cartData) && (
         <div className="checkout">
           <p className="flex justify-between">
             <span>Items</span> <span>{cartData.length}</span>
@@ -79,12 +79,12 @@ export default function Cart() {
           </Link>
         </div>
       )}
-      {!cartData.length && (
+      {!isEntityEmpty(cartData) && (
         <div>
           <div className="h6 mt-60">
             Cart is empty
             <span className="pl-6 link-tag">
-              <Link to="/products">Continue shopping</Link>{" "}
+              <Link to="/products">Continue shopping</Link>
             </span>
           </div>
         </div>

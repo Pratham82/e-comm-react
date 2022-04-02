@@ -4,15 +4,21 @@ import { useState } from "react";
 import useProduct from "hooks/useProducts";
 import { FILTER_BY_QUERY } from "types/product";
 import useCart from "hooks/useCart";
+import useWishlist from "hooks/useWishlist";
+import { isEntityEmpty } from "utils";
 
 export default function Navbar() {
-  const { dispatch } = useProduct();
   const [query, setQuery] = useState("");
-
+  const { dispatch } = useProduct();
   const {
     data: { cartData },
   } = useCart();
-  const cartItems = cartData.length > 0 && cartData.length;
+  const {
+    data: { wishlistData },
+  } = useWishlist();
+
+  const cartItems = isEntityEmpty(cartData);
+  const wishlistItems = isEntityEmpty(wishlistData);
 
   return (
     <nav className="flex justify-around items-center navbar">
@@ -63,6 +69,9 @@ export default function Navbar() {
           to="wishlist"
           className={({ isActive }) => (isActive ? "active-icon pb-2" : "")}
         >
+          {wishlistItems && (
+            <span className="hovering-count">{wishlistItems}</span>
+          )}
           <li>
             <i className="far fa-heart" />
           </li>

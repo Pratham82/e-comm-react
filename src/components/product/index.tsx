@@ -1,6 +1,8 @@
 import useCart from "hooks/useCart";
+import useWishlist from "hooks/useWishlist";
 import { addToCart } from "services/cart";
-import { checkDuplicate } from "utils";
+import { addToWishlist, removeFromWishlist } from "services/wishlist/indext";
+import { checkDuplicate, isProductInWishlist } from "utils";
 
 export default function Product({ productData }: any) {
   const { id, name, image, price, inStock, ratings, fastDelivery } =
@@ -9,15 +11,38 @@ export default function Product({ productData }: any) {
     data: { cartData },
     dispatchCart,
   } = useCart();
+  const {
+    data: { wishlistData },
+    wishlistDispatch,
+  } = useWishlist();
+
+  const handleWishlist = (prodId: any) =>
+    !isProductInWishlist(prodId, wishlistData)
+      ? addToWishlist(productData, wishlistDispatch)
+      : removeFromWishlist(prodId, wishlistDispatch);
 
   return (
     <div className="card card-v floating-shadow">
       <div className="card-body flex justify-center">
         <div className="card-header flex justify-between">
-          {!inStock && <div className="card-badge">OUT OF STOCK</div>}
-          <span className="wishlist-container">
-            <i className={`fa-heart ${fastDelivery ? "fas" : "fal"}`} />
-          </span>
+          <div
+            className={`card-badge ${
+              !inStock ? "badge-visible" : "badge-hidden"
+            }`}
+          >
+            OUT OF STOCK
+          </div>
+          <button
+            type="button"
+            className="wishlist-container wishlist-btn"
+            onClick={() => handleWishlist(id)}
+          >
+            <i
+              className={`fa-heart ${
+                isProductInWishlist(id, wishlistData) ? "fas" : "fal"
+              }`}
+            />
+          </button>
           <span className="hidden">
             <i className="fal fa-times-circle" />
           </span>
@@ -34,7 +59,7 @@ export default function Product({ productData }: any) {
         <div className="flex items-center justify-center">
           <span className="card-text">
             <span className="rating-container">
-              {ratings} <i className="fas fa-star" key={Math.random()} />{" "}
+              {ratings} <i className="fas fa-star" key={Math.random()} />
             </span>
           </span>
           <span className="card-text">

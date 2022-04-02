@@ -1,11 +1,23 @@
 import useCart from "hooks/useCart";
+import useWishlist from "hooks/useWishlist";
 import { useState } from "react";
 import { removeFromCart, updateProductQuantity } from "services/cart";
+import { addToWishlist, removeFromWishlist } from "services/wishlist/indext";
+import { isProductInWishlist } from "utils";
 
 export default function ProductInCart({ productData }: any) {
   const { id, name, price, quantity, image } = productData;
   const { dispatchCart } = useCart();
+  const {
+    data: { wishlistData },
+    wishlistDispatch,
+  } = useWishlist();
   const [loading, setLoading] = useState({ type: "", value: false });
+  const handleWishlist = (prodId: any) =>
+    !isProductInWishlist(prodId, wishlistData)
+      ? addToWishlist(productData, wishlistDispatch)
+      : removeFromWishlist(prodId, wishlistDispatch);
+
   return (
     <div className="card card-h flex floating-shadow m-10">
       <div className="card-body flex justify-center">
@@ -51,12 +63,26 @@ export default function ProductInCart({ productData }: any) {
               disabled={quantity === 1}
             >
               <i className="fas fa-minus-circle" />
-            </button>{" "}
+            </button>
           </span>
         </div>
         <div className="card-pricing">${price}</div>
-        <button className="card-action-btn btn-h" type="button">
-          <i className="far fa-heart pr-6" /> MOVE TO WISHLIST
+        <button
+          className="card-action-btn btn-h"
+          type="button"
+          onClick={() => handleWishlist(id)}
+        >
+          {isProductInWishlist(id, wishlistData) ? (
+            <>
+              <i className="fa-heart far  pr-6" />
+              REMOVE FROM WISHLIST
+            </>
+          ) : (
+            <>
+              <i className="fa-heart fas  pr-6" />
+              ADD TO WISHLIST
+            </>
+          )}
         </button>
         <button
           className="card-action-btn-outline"
