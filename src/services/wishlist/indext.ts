@@ -2,10 +2,11 @@ import staticToken from "assets/data";
 import axios from "axios";
 import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from "types/cart";
 
+const wishlistURL = "/api/user/wishlist/";
 export const addToWishlist = async (product: any, wishlistDispatch: any) => {
   try {
     await axios.post(
-      "/api/user/wishlist",
+      wishlistURL,
       { product },
       {
         headers: {
@@ -27,7 +28,7 @@ export const removeFromWishlist = async (
   wishlistDispatch: any,
 ) => {
   try {
-    await axios.delete(`/api/user/wishlist/${productId}`, {
+    await axios.delete(`${wishlistURL}${productId}`, {
       headers: {
         authorization: staticToken,
       },
