@@ -1,4 +1,8 @@
 import { SORT_LOWEST_TO_HIGHEST } from "types/product";
+import nike from "assets/images/brands/nike.jpg";
+import jordan from "assets/images/brands/jordan.jpg";
+import adidas from "assets/images/brands/adidas.jpg";
+import puma from "assets/images/brands/puma.jpg";
 
 export const getSortedProducts = (type: any, state: any) => {
   const asc = state.sort((acc: any, product: any) => acc.price - product.price);
@@ -70,3 +74,5 @@ export const isProductInWishlist = (prodId: any, wishlistData: any) => {
 };
 
 export const isEntityEmpty = (items: any) => items.length > 0 && items.length;
+
+export const brandLogos = [nike, jordan, adidas, puma];
