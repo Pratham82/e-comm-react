@@ -27,7 +27,7 @@ export default function Navbar() {
           to="/"
           className={({ isActive }) => (isActive ? "active-link" : "")}
         >
-          <h4 className="h4">Min-shop</h4>
+          <h4 className="h4">SNKR Town</h4>
         </NavLink>
         <NavLink
           to="/products"

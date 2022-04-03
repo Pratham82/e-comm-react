@@ -70,7 +70,7 @@ export default function Product({ productData }: any) {
             )}
           </span>
         </div>
-        <div className="card-pricing">$ {price}</div>
+        <div className="card-pricing"> ₹ {price}</div>
         {inStock ? (
           <button
             type="button"

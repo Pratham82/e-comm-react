@@ -60,13 +60,13 @@ export default function Cart() {
             <span>Items</span> <span>{cartData.length}</span>
           </p>
           <p className="flex justify-between">
-            <span>Subtotal</span> <span>${subTotal}</span>
+            <span>Subtotal</span> <span>₹ {subTotal}</span>
           </p>
           <p className="flex justify-between">
-            <span>Delivery</span> <span>${deliveryCharges}</span>
+            <span>Delivery</span> <span>₹ {deliveryCharges}</span>
           </p>
           <p className="flex justify-between total">
-            <span>Total</span> <span>${totalCost}</span>
+            <span>Total</span> <span>₹ {totalCost}</span>
           </p>
           <button className="btn primary-filled-btn checkout-btn" type="button">
             Checkout
