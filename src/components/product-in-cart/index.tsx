@@ -66,7 +66,7 @@ export default function ProductInCart({ productData }: any) {
             </button>
           </span>
         </div>
-        <div className="card-pricing">${price}</div>
+        <div className="card-pricing">₹ {price}</div>
         <button
           className="card-action-btn btn-h"
           type="button"

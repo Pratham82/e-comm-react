@@ -7,11 +7,11 @@ import {
 import useProduct from "hooks/useProducts";
 import Rating from "components/rating";
 
+export const allBrands = ["Nike", "Air Jordan", "Adidas", "Puma"];
 export default function Categories() {
   const { state, dispatch } = useProduct();
   const { filters } = state;
   const { outOfStock, fastDelivery, brands } = filters;
-  const allBrands = ["Nike", "Air Jordan", "Adidas", "Puma"];
   const filterBrands = (brand: any) => {
     return !brands.includes(brand)
       ? dispatch({
