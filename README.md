@@ -18,11 +18,13 @@
 - [SNKR Town](#snkr-town)
   - [📕 Table of Contents](#-table-of-contents)
   - [🔗 Live Link](#-live-link)
+  - [🖥️ Demo](#️-demo)
   - [📖 About](#-about)
   - [🛠️ Tech Stack](#️-tech-stack)
   - [🚀 Features](#-features)
   - [✨ Features You will See in Future](#-features-you-will-see-in-future)
   - [🔌 Getting Started](#-getting-started)
+  - [🖥️ Available commands](#️-available-commands)
   - [👨‍💻 Connect with me](#-connect-with-me)
 
 ---
@@ -30,6 +32,12 @@
 ## 🔗 Live Link
 
 - [Live Site](https://snkr-town.vercel.app)
+
+---
+
+## 🖥️ Demo
+
+---
 
 ## 📖 About
 
@@ -131,13 +139,13 @@ cd code-tube
 npm install
 ```
 
+## 🖥️ Available commands
+
 <!-- - create a `.env` file at the root level of the directory (at the level of `package.json`) and create a variable like mentioned below
 
 ```
 REACT_APP_JWT_SECRET = <JWT_SECRET_KEY_OF_YOUR_CHOICE>
 ``` -->
-
-### Available commands
 
 - start the server
 
