@@ -4,9 +4,9 @@
 
 # SNKR Town
 
-
 ![Forks](https://img.shields.io/github/forks/pratham82/snkr-town)
 ![Stars](https://img.shields.io/github/stars/pratham82/snkr-town)
+
 <!-- ![License](https://img.shields.io/github/license/pratham82/snkr-town) -->
 
 </div>
@@ -28,6 +28,7 @@
 ---
 
 ## 🔗 Live Link
+
 - [Live Site](https://snkr-town.vercel.app)
 
 ## 📖 About
@@ -35,12 +36,12 @@
 SNKR(Sneaker) Town is home for all sneakerkheads, sneaker enthusiasts. It has curated range of sneakers from the top brands in the industry. Checkout the best sneakers in town
 
 ---
+
 ## 🛠️ Tech Stack
 
 - React
 - TypeScript
 - [MinUI](https://min-ui.netlify.app/) component library
-- [Scss](https://sass-lang.com/) for styling
 - [MockBee](https://mockbee.netlify.app/) for mock backend
 - React router v6
 - `ESLint` and `Prettier` for linting and formatting
@@ -50,45 +51,54 @@ SNKR(Sneaker) Town is home for all sneakerkheads, sneaker enthusiasts. It has cu
 ## 🚀 Features
 
 **Home Page**
+
 - A brief about SNKR town
   Shop by Brands/Categories
 
 **Product Listing page**
+
 - List all available products
 - List all available filters
 
 **Filtering products**
+
 - Filters
-  + Categories
-  + Fast delivery/ Out of stock
-  + By rating
+
+  - Categories
+  - Fast delivery/ Out of stock
+  - By rating
 
 - Sorting
-  + Based on price low to high/ high to low
 
--  Range
-     + Price range
+  - Based on price low to high/ high to low
+
+- Range
+
+  - Price range
 
 - Clear all filters
 
 **WishList**
+
 - Add product in `Wishlist`
 - Remove product from `Wishlist`
 - List all products added to `Wishlist`
 
 **Cart**
+
 - Add product in `cart`
 - Remove product from `cart`
 - List all products added to `cart`
-- Pricing card 
-    + Shows grand total of all products included in cart
-    + Option to continue shopping, redirects to product listing
+- Pricing card
+  - Shows grand total of all products included in cart
+  - Option to continue shopping, redirects to product listing
 - Product card in cart
-  + Increase or decrease the number of items in `cart`
-  + Add or remove items from wishlist
-  + Add or remove items from `cart`
+  - Increase or decrease the number of items in `cart`
+  - Add or remove items from wishlist
+  - Add or remove items from `cart`
 
 **Navbar**
+
 - Navigate to home page
 - Navigate to product listing
 - Navigate to cart page
@@ -148,16 +158,16 @@ npm run test
 ```
 
 code linting with eslint
+
 ```
 npm run lint
 ```
 
-
 fix all linting errors with eslint
+
 ```
 npm run lint:fix
 ```
-
 
 ---
 
