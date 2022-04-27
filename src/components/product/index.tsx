@@ -1,5 +1,7 @@
+import { useAuth } from "contexts/auth/authState";
 import useCart from "hooks/useCart";
 import useWishlist from "hooks/useWishlist";
+import { useNavigate } from "react-router-dom";
 import { addToCart } from "services/cart";
 import { addToWishlist, removeFromWishlist } from "services/wishlist/indext";
 import { checkDuplicate, isProductInWishlist } from "utils";
@@ -15,11 +17,15 @@ export default function Product({ productData }: any) {
     data: { wishlistData },
     wishlistDispatch,
   } = useWishlist();
+  const {
+    authState: { isAuthenticated },
+  } = useAuth();
+  const navigate = useNavigate();
 
   const handleWishlist = (prodId: any) =>
     !isProductInWishlist(prodId, wishlistData)
-      ? addToWishlist(productData, wishlistDispatch)
-      : removeFromWishlist(prodId, wishlistDispatch);
+      ? addToWishlist(isAuthenticated, productData, wishlistDispatch, navigate)
+      : removeFromWishlist(isAuthenticated, prodId, wishlistDispatch, navigate);
 
   return (
     <div className="card card-v floating-shadow">
@@ -75,7 +81,9 @@ export default function Product({ productData }: any) {
           <button
             type="button"
             className="card-action-btn"
-            onClick={() => addToCart(productData, dispatchCart)}
+            onClick={() =>
+              addToCart(isAuthenticated, productData, dispatchCart, navigate)
+            }
             disabled={checkDuplicate(id, cartData)}
           >
             {!checkDuplicate(id, cartData) ? (

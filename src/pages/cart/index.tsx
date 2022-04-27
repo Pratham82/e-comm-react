@@ -10,8 +10,7 @@ export default function Cart() {
   } = useCart();
   const getTotal = () => {
     const subTotal = cartData.reduce(
-      (total: any, { price, quantity }: any) =>
-        total + Number(price) * quantity,
+      (total: any, { price, qty }: any) => total + Number(price) * qty,
       0,
     );
     const deliveryCharges = cartData.length * 20;
@@ -36,7 +35,7 @@ export default function Cart() {
               inStock,
               fastDelivery,
               ratings,
-              quantity,
+              qty,
             }: any) => (
               <ProductInCart
                 key={id}
@@ -48,7 +47,7 @@ export default function Cart() {
                   inStock,
                   fastDelivery,
                   ratings,
-                  quantity,
+                  qty,
                 }}
               />
             ),
