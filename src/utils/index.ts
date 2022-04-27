@@ -76,3 +76,17 @@ export const isProductInWishlist = (prodId: any, wishlistData: any) => {
 export const isEntityEmpty = (items: any) => items.length > 0 && items.length;
 
 export const brandLogos = [nike, jordan, adidas, puma];
+
+export const removeDuplicateProducts = (cartData: any) => {
+  const ids: any = {};
+  const res: any = [];
+  // eslint-disable-next-line no-restricted-syntax
+  for (const prod of cartData) {
+    const { name } = prod;
+    if (!ids[name]) {
+      ids[name] = true;
+      res.push(prod);
+    }
+  }
+  return res;
+};
