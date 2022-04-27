@@ -1,19 +1,22 @@
-import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from "types/cart";
+import {
+  EMPTY_WISHLIST,
+  // ADD_TO_WISHLIST,
+  // REMOVE_FROM_WISHLIST,
+  UPDATE_WISHLIST,
+} from "types/cart";
 
 const wishListReducer = (wishlist: any, { type, payload }: any) => {
   switch (type) {
-    case ADD_TO_WISHLIST:
+    case UPDATE_WISHLIST:
       return {
         ...wishlist,
-        wishlistData: [payload, ...wishlist.wishlistData],
+        wishlistData: payload,
       };
 
-    case REMOVE_FROM_WISHLIST:
+    case EMPTY_WISHLIST:
       return {
         ...wishlist,
-        wishlistData: wishlist.wishlistData.filter(
-          ({ id }: any) => id !== payload,
-        ),
+        wishlistData: [],
       };
 
     default:

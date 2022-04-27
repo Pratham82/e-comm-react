@@ -2,7 +2,6 @@ import { useState, useEffect, useReducer } from "react";
 
 // import { useState } from "react";
 import axios from "axios";
-import staticToken from "assets/data";
 import WishlistContext from ".";
 import wishListReducer from "./wishListReducer";
 
@@ -17,7 +16,7 @@ export default function WishlistProvider({ children }: any) {
         const {
           data: { wishlist },
         } = await axios.get("/api/user/wishlist", {
-          headers: { authorization: staticToken },
+          headers: { authorization: localStorage.getItem("token") },
         });
         setData({ ...initialData, wishlistData: wishlist });
       } catch (e) {

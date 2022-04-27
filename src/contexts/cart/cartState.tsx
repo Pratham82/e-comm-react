@@ -1,35 +1,35 @@
-import { useState, useEffect, useReducer } from "react";
-
-// import { useState } from "react";
-import axios from "axios";
-import staticToken from "assets/data";
-import DataSourceContext from ".";
+import { useReducer } from "react";
+// import axios from "axios";
+// import toast from "react-hot-toast";
 import cartReducer from "./cartReducer";
+import CartContext from ".";
 
 const initialData = {
+  cart: [],
   cartData: [],
 };
 export default function CartProvider({ children }: any) {
-  const [data, setData] = useState(initialData);
-  useEffect(() => {
-    (async () => {
-      try {
-        const {
-          data: { cart },
-        } = await axios.get("/api/user/cart", {
-          headers: { authorization: staticToken },
-        });
-        setData({ ...initialData, cartData: cart });
-      } catch (e) {
-        // console.log(e);
-      }
-    })();
-  }, []);
-  const [cartData, dispatchCart] = useReducer(cartReducer, data);
+  // const [data] = useState(initialData);
+  // useEffect(() => {
+  //   (async () => {
+  //     if (localStorage.getItem("token"))
+  //       try {
+  //         const {
+  //           data: { cart },
+  //         } = await axios.get("/api/user/cart", {
+  //           headers: { authorization: localStorage.getItem("token") },
+  //         });
+  //         setData({ ...initialData, cartData: cart, cart });
+  //       } catch (e) {
+  //         toast.error("Something went wrong");
+  //       }
+  //   })();
+  // }, []);
+  const [cartData, dispatchCart] = useReducer(cartReducer, initialData);
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <DataSourceContext.Provider value={{ data: cartData, dispatchCart }}>
+    <CartContext.Provider value={{ data: cartData, dispatchCart }}>
       {children}
-    </DataSourceContext.Provider>
+    </CartContext.Provider>
   );
 }
