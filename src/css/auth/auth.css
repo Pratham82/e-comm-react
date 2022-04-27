@@ -6,9 +6,21 @@ li {
   list-style: none;
 }
 
+.text-danger {
+  color: var(--color-danger);
+  font-weight: bold;
+  font-size: var(--text-sm);
+}
+
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  background-color: var(--color-secondary);
+  padding-top: var(--u-55);
+}
+
 .auth {
   background-color: var(--color-light);
-  width: 50%;
   margin: 0 auto;
 }
 
@@ -37,11 +49,14 @@ li {
 
 .tabLinks {
   cursor: pointer;
+  background-color: var(--color-tertiary);
+  border: none;
 }
 
 .active {
-  background-color: var(--color-secondary);
   font-weight: 600;
+  background-color: white;
+
 }
 
 .input-default {
