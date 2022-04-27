@@ -5,23 +5,28 @@ import FilterProvider from "contexts/filter/filterState";
 import DataSourceProvider from "contexts/dataSource/dataSourceState";
 import WishlistProvider from "contexts/wishlist/wishlistState";
 import CartProvider from "contexts/cart/cartState";
+import AuthProvider from "contexts/auth/authState";
+import { Toaster } from "react-hot-toast";
 import Routing from "./routes";
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <CartProvider>
-          <WishlistProvider>
-            <DataSourceProvider>
-              <FilterProvider>
-                <Navbar />
-                <Routing />
-              </FilterProvider>
-            </DataSourceProvider>
-          </WishlistProvider>
-        </CartProvider>
-      </Router>
+      <AuthProvider>
+        <Router>
+          <CartProvider>
+            <WishlistProvider>
+              <DataSourceProvider>
+                <FilterProvider>
+                  <Navbar />
+                  <Toaster position="bottom-left" />
+                  <Routing />
+                </FilterProvider>
+              </DataSourceProvider>
+            </WishlistProvider>
+          </CartProvider>
+        </Router>
+      </AuthProvider>
     </div>
   );
 }
