@@ -1,101 +1,67 @@
 import "css/header.css";
 import "css/auth/auth.css";
-import { useState } from "react";
-import { capitalize } from "utils";
-import { login } from "services/auth";
+import { useEffect, useState } from "react";
+import { login, signUp } from "services/auth";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "contexts/auth/authState";
 import useCart from "hooks/useCart";
 import useWishlist from "hooks/useWishlist";
+import { authState, validateCredentials } from "services/auth/auth-utils";
 
-const initialLoginState = {
-  email: "",
-  password: "",
-};
-const initialSignInState = {
-  firstName: "",
-  lastName: "",
-  newEmail: "",
-  newPassword: "",
-};
 const TEST_CREDENTIALS: any = {
   email: process.env.REACT_APP_TEST_EMAIL,
   password: process.env.REACT_APP_TEST_PASSWORD,
 };
-
-let initialErrors = {
-  email: "",
-  password: "",
-};
 export default function Login() {
   const [tabs, setTabs] = useState("login");
-  const [loginCred, setLoginCred] = useState(initialLoginState);
-  const [signInCred, setSignInCred] = useState(initialSignInState);
-  const [errors, setErrors] = useState(initialErrors);
+  const [loginCred, setLoginCred] = useState(authState.loginState);
+  const [signInCred, setSignInCred] = useState(authState.signUpState);
+  const [errors, setErrors] = useState(authState.loginErrors);
+  const [newErrors, setSignUpErrors] = useState(authState.signUpErrors);
   const { dispatchAuth } = useAuth();
   const { email, password } = loginCred;
-  const { firstName, lastName, newEmail, newPassword } = signInCred;
+  const { firstName, lastName } = signInCred;
   const { dispatchCart } = useCart();
   const { wishlistDispatch } = useWishlist();
   const navigate = useNavigate();
   const location: any = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  const validate = () => {
-    let flag = false;
-    Object.entries(loginCred).map(([name, value]: any) => {
-      const errors2 =
-        value === "" || value < 1 ? `${capitalize(name)} cannot be empty` : "";
-      initialErrors = { ...initialErrors, [name]: errors2 };
-      const validCheck = Object.values(initialErrors)
-        .map((err) => err)
-        .every((err) => err === "");
-      flag = validCheck;
-      return flag;
-    });
-    setErrors(initialErrors);
-    return flag;
-  };
-
-  const handleSignIn = async (e: any) => {
-    e.preventDefault();
+  const handleChange = (e: any, type: string) => {
     const {
       target: { value, name },
     } = e;
-    setSignInCred({
-      ...signInCred,
-      [name]: value,
-    });
-  };
-
-  const handleChange = (e: any) => {
-    const {
-      target: { value, name },
-    } = e;
-    setLoginCred({
-      ...loginCred,
-      [name]: value,
-    });
+    if (type === "login")
+      setLoginCred({
+        ...loginCred,
+        [name]: value,
+      });
+    else
+      setSignInCred({
+        ...signInCred,
+        [name]: value,
+      });
   };
 
   const handleFormSubmit = (event: any) => {
     if (tabs === "login") {
       event.preventDefault();
-      validate();
-      setLoginCred(loginCred);
-      login(
-        dispatchAuth,
-        dispatchCart,
-        wishlistDispatch,
-        loginCred,
-        navigate,
-        from,
-      );
-      // navigate(location?.state?.from?.pathname);
-      navigate(from);
-      setErrors(initialErrors);
-    } else {
-      console.log("sign in");
+      if (validateCredentials(loginCred, authState.loginErrors, setErrors)) {
+        setLoginCred(loginCred);
+        login(
+          dispatchAuth,
+          dispatchCart,
+          wishlistDispatch,
+          loginCred,
+          navigate,
+          from,
+        );
+      }
+    } else if (
+      validateCredentials(signInCred, authState.signUpErrors, setSignUpErrors)
+    ) {
+      setSignInCred(signInCred);
+      signUp(dispatchAuth, signInCred, navigate, from);
     }
   };
 
@@ -111,6 +77,11 @@ export default function Login() {
       from,
     );
   };
+
+  useEffect(() => {
+    setErrors(authState.loginErrors);
+    setSignUpErrors(authState.signUpErrors);
+  }, [tabs]);
 
   return (
     <div className="auth-wrapper">
@@ -149,7 +120,7 @@ export default function Login() {
                       type="email"
                       value={email}
                       required
-                      onChange={(e) => handleChange(e)}
+                      onChange={(e) => handleChange(e, "login")}
                       placeholder="Enter email"
                     />
                     <span className="text-danger">{errors.email}</span>
@@ -161,7 +132,7 @@ export default function Login() {
                       name="password"
                       type="password"
                       value={password}
-                      onChange={(e) => handleChange(e)}
+                      onChange={(e) => handleChange(e, "login")}
                       placeholder="Enter password"
                     />
                     <span className="text-danger">{errors.password}</span>
@@ -195,10 +166,11 @@ export default function Login() {
                     name="firstName"
                     type="text"
                     value={firstName}
-                    onChange={(e) => handleSignIn(e)}
+                    onChange={(e) => handleChange(e, "signIn")}
                     placeholder="Enter first name"
                     required
                   />
+                  <span className="text-danger">{newErrors.firstName}</span>
                 </div>
                 <div className="flex flex-col pr-32 pl-32 pb-14">
                   <span>Last name</span>
@@ -207,34 +179,38 @@ export default function Login() {
                     name="lastName"
                     type="text"
                     value={lastName}
-                    onChange={(e) => handleSignIn(e)}
+                    onChange={(e) => handleChange(e, "signIn")}
                     placeholder="Enter last name"
                     required
                   />
+
+                  <span className="text-danger">{newErrors.lastName}</span>
                 </div>
                 <div className="flex flex-col pr-32 pl-32 pb-14">
                   <span>Email</span>
                   <input
                     className="input-default"
-                    name="newEmail"
+                    name="email"
                     type="text"
-                    value={newEmail}
-                    onChange={(e) => handleSignIn(e)}
+                    value={signInCred.email}
+                    onChange={(e) => handleChange(e, "signIn")}
                     placeholder="Enter email"
                     required
                   />
+                  <span className="text-danger">{newErrors.email}</span>
                 </div>
                 <div className="flex flex-col pr-32 pl-32 pb-14">
                   <span>Password</span>
                   <input
                     className="input-default"
-                    name="newPassword"
+                    name="password"
                     type="password"
-                    value={newPassword}
-                    onChange={(e) => handleSignIn(e)}
+                    value={signInCred.password}
+                    onChange={(e) => handleChange(e, "signIn")}
                     placeholder="Enter password"
                     required
                   />
+                  <span className="text-danger">{newErrors.password}</span>
                 </div>
                 <div className="flex justify-center pt-20 pb-14 pr-32 pl-32">
                   <button
