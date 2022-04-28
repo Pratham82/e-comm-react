@@ -33,8 +33,29 @@ export const login = async (
     navigate(location);
     toast.success("Logged in successfully");
   } catch (error) {
-    toast.error("Unable to login");
+    toast.error("Credentials does not match with our records");
   }
 };
 
-export const logout = "";
+export const signUp = async (
+  dispatchAuth: any,
+  credentials: any,
+  navigate: any,
+  location: any,
+) => {
+  try {
+    const {
+      data: { createdUser, encodedToken },
+    } = await axios.post("/api/auth/signup", credentials);
+    dispatchAuth({
+      type: LOG_IN,
+      payload: createdUser,
+    });
+    localStorage.setItem("token", encodedToken);
+    localStorage.setItem("user", JSON.stringify(createdUser));
+    navigate(location);
+    toast.success("Signed in successfully");
+  } catch (error) {
+    toast.error("Email already present in our records");
+  }
+};
