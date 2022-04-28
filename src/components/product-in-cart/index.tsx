@@ -1,22 +1,32 @@
+import { useAuth } from "contexts/auth/authState";
 import useCart from "hooks/useCart";
 import useWishlist from "hooks/useWishlist";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { removeFromCart, updateProductQuantity } from "services/cart";
 import { addToWishlist, removeFromWishlist } from "services/wishlist/indext";
+import {
+  DECREMENT_PRODUCT_QUANTITY,
+  INCREMENT_PRODUCT_QUANTITY,
+} from "types/cart";
 import { isProductInWishlist } from "utils";
 
 export default function ProductInCart({ productData }: any) {
-  const { id, name, price, quantity, image } = productData;
+  const { id, name, price, qty, image } = productData;
   const { dispatchCart } = useCart();
   const {
     data: { wishlistData },
     wishlistDispatch,
   } = useWishlist();
+  const {
+    authState: { isAuthenticated },
+  } = useAuth();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState({ type: "", value: false });
   const handleWishlist = (prodId: any) =>
     !isProductInWishlist(prodId, wishlistData)
-      ? addToWishlist(productData, wishlistDispatch)
-      : removeFromWishlist(prodId, wishlistDispatch);
+      ? addToWishlist(isAuthenticated, productData, wishlistDispatch, navigate)
+      : removeFromWishlist(isAuthenticated, prodId, wishlistDispatch, navigate);
 
   return (
     <div className="card card-h flex floating-shadow m-10">
@@ -48,19 +58,29 @@ export default function ProductInCart({ productData }: any) {
               type="button"
               className="qty-action"
               onClick={() =>
-                updateProductQuantity(id, "inc", dispatchCart, setLoading)
+                updateProductQuantity(
+                  id,
+                  INCREMENT_PRODUCT_QUANTITY,
+                  dispatchCart,
+                  setLoading,
+                )
               }
             >
               <i className="fas fa-plus-circle" />
             </button>
-            <span className="pr-10 pl-10">{quantity}</span>
+            <span className="pr-10 pl-10">{qty}</span>
             <button
               type="button"
               className="qty-action"
               onClick={() =>
-                updateProductQuantity(id, "dec", dispatchCart, setLoading)
+                updateProductQuantity(
+                  id,
+                  DECREMENT_PRODUCT_QUANTITY,
+                  dispatchCart,
+                  setLoading,
+                )
               }
-              disabled={quantity === 1}
+              disabled={qty === 1}
             >
               <i className="fas fa-minus-circle" />
             </button>

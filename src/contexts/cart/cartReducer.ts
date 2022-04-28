@@ -1,46 +1,28 @@
 import {
   ADD_TO_CART,
+  EMPTY_CART,
   REMOVE_FROM_CART,
-  INCREMENT_PRODUCT_QUANTITY,
-  DECREMENT_PRODUCT_QUANTITY,
+  UPDATE_PRODUCT_QUANTITY,
 } from "types/cart";
 
-const cartReducer = (cart: any, { type, payload }: any) => {
+const cartReducer = (cartState: any, { type, payload }: any) => {
   switch (type) {
     case ADD_TO_CART:
-      return {
-        ...cart,
-        cartData: [{ ...payload, quantity: 1 }, ...cart.cartData],
-      };
-
     case REMOVE_FROM_CART:
+    case UPDATE_PRODUCT_QUANTITY:
       return {
-        ...cart,
-        cartData: cart.cartData.filter(({ id }: any) => id !== payload),
+        cartData: payload,
+        cart: payload,
       };
 
-    case INCREMENT_PRODUCT_QUANTITY:
+    case EMPTY_CART:
       return {
-        ...cart,
-        cartData: cart.cartData.map((product: any) =>
-          product.id === payload
-            ? { ...product, quantity: product.quantity + 1 }
-            : product,
-        ),
-      };
-
-    case DECREMENT_PRODUCT_QUANTITY:
-      return {
-        ...cart,
-        cartData: cart.cartData.map((product: any) =>
-          product.id === payload
-            ? { ...product, quantity: product.quantity - 1 }
-            : product,
-        ),
+        cartData: [],
+        cart: [],
       };
 
     default:
-      return cart;
+      return cartState;
   }
 };
 

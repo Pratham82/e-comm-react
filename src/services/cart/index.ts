@@ -1,35 +1,41 @@
-import staticToken from "assets/data";
 import axios from "axios";
+import toast from "react-hot-toast";
 import {
   ADD_TO_CART,
-  DECREMENT_PRODUCT_QUANTITY,
-  INCREMENT_PRODUCT_QUANTITY,
+  UPDATE_PRODUCT_QUANTITY,
   REMOVE_FROM_CART,
 } from "types/cart";
+import { removeDuplicateProducts } from "utils";
 
 export const addToCart = async (
+  isAuth: any,
   product: any,
   cartDispatch: any,
-  // setLoading?: any,
+  navigate: any,
 ) => {
-  try {
-    // setLoading(true);
-    await axios.post(
-      "/api/user/cart",
-      { product },
-      {
-        headers: { authorization: staticToken },
-      },
-    );
+  if (isAuth)
+    try {
+      const {
+        data: { cart },
+      } = await axios.post(
+        "/api/user/cart",
+        { product },
+        {
+          headers: { authorization: localStorage.getItem("token") },
+        },
+      );
+      const filtered = removeDuplicateProducts(cart);
 
-    cartDispatch({
-      type: ADD_TO_CART,
-      payload: product,
-    });
-
-    // setLoading(false);
-  } catch (error) {
-    console.log(error);
+      cartDispatch({
+        type: ADD_TO_CART,
+        payload: filtered,
+      });
+    } catch (error) {
+      toast.error("Unable to add to cart");
+    }
+  else {
+    toast.error("User not logged in");
+    navigate("/login");
   }
 };
 
@@ -40,18 +46,20 @@ export const removeFromCart = async (
 ) => {
   setLoading({ type: "remove", value: true });
   try {
-    await axios.delete(`/api/user/cart/${productId}`, {
-      headers: { authorization: staticToken },
+    const {
+      data: { cart },
+    } = await axios.delete(`/api/user/cart/${productId}`, {
+      headers: { authorization: localStorage.getItem("token") },
     });
 
     cartDispatch({
       type: REMOVE_FROM_CART,
-      payload: productId,
+      payload: cart,
     });
 
     setLoading({ type: "remove", value: false });
   } catch (error) {
-    console.log(error);
+    toast.error("Unable to add to cart");
   }
 };
 
@@ -63,7 +71,9 @@ export const updateProductQuantity = async (
 ) => {
   try {
     setLoading({ type: "update", value: true });
-    await axios.post(
+    const {
+      data: { cart },
+    } = await axios.post(
       `/api/user/cart/${productId}`,
       {
         action: {
@@ -71,20 +81,17 @@ export const updateProductQuantity = async (
         },
       },
       {
-        headers: { authorization: staticToken },
+        headers: { authorization: localStorage.getItem("token") },
       },
     );
 
     dispatchCart({
-      type:
-        typeOfUpdate === "inc"
-          ? INCREMENT_PRODUCT_QUANTITY
-          : DECREMENT_PRODUCT_QUANTITY,
-      payload: productId,
+      type: UPDATE_PRODUCT_QUANTITY,
+      payload: cart,
     });
 
     setLoading({ type: "update", value: false });
   } catch (error) {
-    console.log(error);
+    toast.error("Unable to update cart");
   }
 };
